@@ -61,6 +61,6 @@
   ],
   "release-type": "python",
   "extra-files": [
-    "src/zbdpay_payments_sdk/_version.py"
+    "src/zbdpay/_version.py"
   ]
 }
