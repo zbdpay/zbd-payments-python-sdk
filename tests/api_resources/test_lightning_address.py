@@ -26,7 +26,7 @@ class TestLightningAddress:
     def test_method_create_charge_with_all_params(self, client: ZbdPayments) -> None:
         lightning_address = client.lightning_address.create_charge(
             amount="string",
-            description="‎",
+            description="string",
             lnaddress="string",
         )
         assert lightning_address is None
@@ -64,9 +64,9 @@ class TestLightningAddress:
     def test_method_send_payment_with_all_params(self, client: ZbdPayments) -> None:
         lightning_address = client.lightning_address.send_payment(
             amount="string",
-            callback_url="‎",
-            comment="‎",
-            internal_id="‎",
+            callback_url="string",
+            comment="string",
+            internal_id="string",
             ln_address="string",
         )
         assert lightning_address is None
@@ -150,7 +150,7 @@ class TestAsyncLightningAddress:
     async def test_method_create_charge_with_all_params(self, async_client: AsyncZbdPayments) -> None:
         lightning_address = await async_client.lightning_address.create_charge(
             amount="string",
-            description="‎",
+            description="string",
             lnaddress="string",
         )
         assert lightning_address is None
@@ -188,9 +188,9 @@ class TestAsyncLightningAddress:
     async def test_method_send_payment_with_all_params(self, async_client: AsyncZbdPayments) -> None:
         lightning_address = await async_client.lightning_address.send_payment(
             amount="string",
-            callback_url="‎",
-            comment="‎",
-            internal_id="‎",
+            callback_url="string",
+            comment="string",
+            internal_id="string",
             ln_address="string",
         )
         assert lightning_address is None

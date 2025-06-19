@@ -26,7 +26,7 @@ class TestEmailPayments:
     def test_method_send_with_all_params(self, client: ZbdPayments) -> None:
         email_payment = client.email_payments.send(
             amount="string",
-            comment="‎",
+            comment="string",
             email="string",
         )
         assert email_payment is None
@@ -68,7 +68,7 @@ class TestAsyncEmailPayments:
     async def test_method_send_with_all_params(self, async_client: AsyncZbdPayments) -> None:
         email_payment = await async_client.email_payments.send(
             amount="string",
-            comment="‎",
+            comment="string",
             email="string",
         )
         assert email_payment is None

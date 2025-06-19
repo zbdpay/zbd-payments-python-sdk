@@ -26,10 +26,10 @@ class TestLightningCharges:
     def test_method_create_with_all_params(self, client: ZbdPayments) -> None:
         lightning_charge = client.lightning_charges.create(
             amount="string",
-            callback_url="‎",
+            callback_url="string",
             description="string",
             expires_in=0,
-            internal_id="‎",
+            internal_id="string",
         )
         assert lightning_charge is None
 
@@ -112,10 +112,10 @@ class TestAsyncLightningCharges:
     async def test_method_create_with_all_params(self, async_client: AsyncZbdPayments) -> None:
         lightning_charge = await async_client.lightning_charges.create(
             amount="string",
-            callback_url="‎",
+            callback_url="string",
             description="string",
             expires_in=0,
-            internal_id="‎",
+            internal_id="string",
         )
         assert lightning_charge is None
 

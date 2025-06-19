@@ -26,11 +26,11 @@ class TestGamertags:
     def test_method_create_charge_with_all_params(self, client: ZbdPayments) -> None:
         gamertag = client.gamertags.create_charge(
             amount="string",
-            callback_url="‎",
-            description="‎",
+            callback_url="string",
+            description="string",
             expires_in=0,
             gamertag="string",
-            internal_id="‎",
+            internal_id="string",
         )
         assert gamertag is None
 
@@ -193,7 +193,7 @@ class TestGamertags:
     def test_method_send_payment_with_all_params(self, client: ZbdPayments) -> None:
         gamertag = client.gamertags.send_payment(
             amount="string",
-            description="‎",
+            description="string",
             gamertag="string",
         )
         assert gamertag is None
@@ -235,11 +235,11 @@ class TestAsyncGamertags:
     async def test_method_create_charge_with_all_params(self, async_client: AsyncZbdPayments) -> None:
         gamertag = await async_client.gamertags.create_charge(
             amount="string",
-            callback_url="‎",
-            description="‎",
+            callback_url="string",
+            description="string",
             expires_in=0,
             gamertag="string",
-            internal_id="‎",
+            internal_id="string",
         )
         assert gamertag is None
 
@@ -402,7 +402,7 @@ class TestAsyncGamertags:
     async def test_method_send_payment_with_all_params(self, async_client: AsyncZbdPayments) -> None:
         gamertag = await async_client.gamertags.send_payment(
             amount="string",
-            description="‎",
+            description="string",
             gamertag="string",
         )
         assert gamertag is None
