@@ -26,10 +26,10 @@ class TestWithdrawalRequests:
     def test_method_create_with_all_params(self, client: ZbdPayments) -> None:
         withdrawal_request = client.withdrawal_requests.create(
             amount="string",
-            callback_url="‎",
-            description="‎",
-            expires_in=123,
-            internal_id="‎",
+            callback_url="string",
+            description="string",
+            expires_in=0,
+            internal_id="string",
         )
         assert withdrawal_request is None
 
@@ -112,10 +112,10 @@ class TestAsyncWithdrawalRequests:
     async def test_method_create_with_all_params(self, async_client: AsyncZbdPayments) -> None:
         withdrawal_request = await async_client.withdrawal_requests.create(
             amount="string",
-            callback_url="‎",
-            description="‎",
-            expires_in=123,
-            internal_id="‎",
+            callback_url="string",
+            description="string",
+            expires_in=0,
+            internal_id="string",
         )
         assert withdrawal_request is None
 

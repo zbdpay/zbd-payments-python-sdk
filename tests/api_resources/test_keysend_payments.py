@@ -26,7 +26,7 @@ class TestKeysendPayments:
     def test_method_send_with_all_params(self, client: ZbdPayments) -> None:
         keysend_payment = client.keysend_payments.send(
             amount="string",
-            callback_url="‎",
+            callback_url="string",
             metadata=True,
             pubkey="string",
             tlv_records=["string"],
@@ -71,7 +71,7 @@ class TestAsyncKeysendPayments:
     async def test_method_send_with_all_params(self, async_client: AsyncZbdPayments) -> None:
         keysend_payment = await async_client.keysend_payments.send(
             amount="string",
-            callback_url="‎",
+            callback_url="string",
             metadata=True,
             pubkey="string",
             tlv_records=["string"],

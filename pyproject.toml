@@ -5,7 +5,7 @@ description = "The official Python library for the zbd-payments API"
 dynamic = ["readme"]
 license = "MIT"
 authors = [
-{ name = "Zbd Payments", email = "info@zebedee.io" },
+{ name = "Zbd Payments", email = "info@zbdpay.com" },
 ]
 dependencies = [
     "httpx>=0.23.0, <1",

@@ -26,13 +26,13 @@ class TestLightningStaticCharges:
     def test_method_create_with_all_params(self, client: ZbdPayments) -> None:
         lightning_static_charge = client.lightning_static_charges.create(
             allowed_slots=123,
-            callback_url="‎",
+            callback_url="string",
             description="string",
-            identifier="‎",
-            internal_id="‎",
+            identifier="string",
+            internal_id="string",
             max_amount="string",
             min_amount="string",
-            success_message="‎",
+            success_message="string",
         )
         assert lightning_static_charge is None
 
@@ -114,12 +114,12 @@ class TestLightningStaticCharges:
         lightning_static_charge = client.lightning_static_charges.update(
             id="id",
             allowed_slots=123,
-            callback_url="‎",
-            description="‎",
-            internal_id="‎",
-            max_amount="‎",
-            min_amount="‎",
-            success_message="‎",
+            callback_url="string",
+            description="string",
+            internal_id="string",
+            max_amount="string",
+            min_amount="string",
+            success_message="string",
         )
         assert lightning_static_charge is None
 
@@ -172,13 +172,13 @@ class TestAsyncLightningStaticCharges:
     async def test_method_create_with_all_params(self, async_client: AsyncZbdPayments) -> None:
         lightning_static_charge = await async_client.lightning_static_charges.create(
             allowed_slots=123,
-            callback_url="‎",
+            callback_url="string",
             description="string",
-            identifier="‎",
-            internal_id="‎",
+            identifier="string",
+            internal_id="string",
             max_amount="string",
             min_amount="string",
-            success_message="‎",
+            success_message="string",
         )
         assert lightning_static_charge is None
 
@@ -260,12 +260,12 @@ class TestAsyncLightningStaticCharges:
         lightning_static_charge = await async_client.lightning_static_charges.update(
             id="id",
             allowed_slots=123,
-            callback_url="‎",
-            description="‎",
-            internal_id="‎",
-            max_amount="‎",
-            min_amount="‎",
-            success_message="‎",
+            callback_url="string",
+            description="string",
+            internal_id="string",
+            max_amount="string",
+            min_amount="string",
+            success_message="string",
         )
         assert lightning_static_charge is None
 

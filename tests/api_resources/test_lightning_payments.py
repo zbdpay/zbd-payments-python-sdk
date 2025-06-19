@@ -67,10 +67,10 @@ class TestLightningPayments:
     @parametrize
     def test_method_send_with_all_params(self, client: ZbdPayments) -> None:
         lightning_payment = client.lightning_payments.send(
-            amount="‎",
-            callback_url="‎",
-            description="‎",
-            internal_id="‎",
+            amount="string",
+            callback_url="string",
+            description="string",
+            internal_id="string",
             invoice="string",
         )
         assert lightning_payment is None
@@ -153,10 +153,10 @@ class TestAsyncLightningPayments:
     @parametrize
     async def test_method_send_with_all_params(self, async_client: AsyncZbdPayments) -> None:
         lightning_payment = await async_client.lightning_payments.send(
-            amount="‎",
-            callback_url="‎",
-            description="‎",
-            internal_id="‎",
+            amount="string",
+            callback_url="string",
+            description="string",
+            internal_id="string",
             invoice="string",
         )
         assert lightning_payment is None
