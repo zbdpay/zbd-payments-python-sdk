@@ -34,8 +34,8 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/stainless-sdks/zbd-payments-python"
-Repository = "https://github.com/stainless-sdks/zbd-payments-python"
+Homepage = "https://github.com/zbdpay/zbd-payments-python-sdk"
+Repository = "https://github.com/zbdpay/zbd-payments-python-sdk"
 
 
 [tool.rye]
@@ -121,7 +121,7 @@ path = "README.md"
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
 # replace relative links with absolute links
 pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
-replacement = '[\1](https://github.com/stainless-sdks/zbd-payments-python/tree/main/\g<2>)'
+replacement = '[\1](https://github.com/zbdpay/zbd-payments-python-sdk/tree/main/\g<2>)'
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
