@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from zbd_payments._utils import required_args
+from zbdpay_payments_sdk._utils import required_args
 
 
 def test_too_many_positional_params() -> None:
