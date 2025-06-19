@@ -4,8 +4,8 @@ from typing import Sequence
 
 import pytest
 
-from zbdpay_payments_sdk._types import FileTypes
-from zbdpay_payments_sdk._utils import extract_files
+from zbdpay._types import FileTypes
+from zbdpay._utils import extract_files
 
 
 def test_removes_files_from_input() -> None:

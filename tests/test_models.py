@@ -7,9 +7,9 @@ import pytest
 import pydantic
 from pydantic import Field
 
-from zbdpay_payments_sdk._utils import PropertyInfo
-from zbdpay_payments_sdk._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
-from zbdpay_payments_sdk._models import BaseModel, construct_type
+from zbdpay._utils import PropertyInfo
+from zbdpay._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
+from zbdpay._models import BaseModel, construct_type
 
 
 class BasicModel(BaseModel):

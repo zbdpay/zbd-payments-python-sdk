@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from zbdpay_payments_sdk import ZbdPayments, AsyncZbdPayments
+from zbdpay import ZbdPayments, AsyncZbdPayments
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
