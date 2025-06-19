@@ -4,7 +4,7 @@ from urllib.parse import unquote
 
 import pytest
 
-from zbd_payments._qs import Querystring, stringify
+from zbdpay_payments_sdk._qs import Querystring, stringify
 
 
 def test_empty() -> None:

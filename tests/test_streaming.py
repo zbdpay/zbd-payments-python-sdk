@@ -5,8 +5,8 @@ from typing import Iterator, AsyncIterator
 import httpx
 import pytest
 
-from zbd_payments import ZbdPayments, AsyncZbdPayments
-from zbd_payments._streaming import Stream, AsyncStream, ServerSentEvent
+from zbdpay_payments_sdk import ZbdPayments, AsyncZbdPayments
+from zbdpay_payments_sdk._streaming import Stream, AsyncStream, ServerSentEvent
 
 
 @pytest.mark.asyncio
