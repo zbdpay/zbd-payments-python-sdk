@@ -1,8 +1,8 @@
-# Zbd Payments Python API library
+# ZBD Payments Python API library
 
 [![PyPI version](<https://img.shields.io/pypi/v/zbdpay.svg?label=pypi%20(stable)>)](https://pypi.org/project/zbdpay/)
 
-The Zbd Payments Python library provides convenient access to the Zbd Payments REST API from any Python 3.8+
+The ZBD Payments Python library provides convenient access to the ZBD Payments REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
