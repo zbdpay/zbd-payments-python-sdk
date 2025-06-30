@@ -1,6 +1,6 @@
 # Zbd Payments Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/zbdpay_payments_sdk.svg)](https://pypi.org/project/zbdpay_payments_sdk/)
+[![PyPI version](<https://img.shields.io/pypi/v/zbdpay.svg?label=pypi%20(stable)>)](https://pypi.org/project/zbdpay/)
 
 The Zbd Payments Python library provides convenient access to the Zbd Payments REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
@@ -13,12 +13,9 @@ The REST API documentation can be found on [docs.zbdpay.com](https://docs.zbdpay
 ## Installation
 
 ```sh
-# install from this staging repo
-pip install git+ssh://git@github.com/stainless-sdks/zbd-payments-python.git
+# install from PyPI
+pip install --pre zbdpay
 ```
-
-> [!NOTE]
-> Once this package is [published to PyPI](https://app.stainless.com/docs/guides/publish), this will become: `pip install --pre zbdpay_payments_sdk`
 
 ## Usage
 
@@ -26,7 +23,7 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
-from zbdpay_payments_sdk import ZbdPayments
+from zbdpay import ZbdPayments
 
 client = ZbdPayments(
     apikey=os.environ.get("ZBD_PAYMENTS_API_KEY"),  # This is the default and can be omitted
@@ -51,7 +48,7 @@ Simply import `AsyncZbdPayments` instead of `ZbdPayments` and use `await` with e
 ```python
 import os
 import asyncio
-from zbdpay_payments_sdk import AsyncZbdPayments
+from zbdpay import AsyncZbdPayments
 
 client = AsyncZbdPayments(
     apikey=os.environ.get("ZBD_PAYMENTS_API_KEY"),  # This is the default and can be omitted
@@ -71,6 +68,41 @@ asyncio.run(main())
 
 Functionality between the synchronous and asynchronous clients is otherwise identical.
 
+### With aiohttp
+
+By default, the async client uses `httpx` for HTTP requests. However, for improved concurrency performance you may also use `aiohttp` as the HTTP backend.
+
+You can enable this by installing `aiohttp`:
+
+```sh
+# install from PyPI
+pip install --pre zbdpay[aiohttp]
+```
+
+Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
+
+```python
+import os
+import asyncio
+from zbdpay import DefaultAioHttpClient
+from zbdpay import AsyncZbdPayments
+
+
+async def main() -> None:
+    async with AsyncZbdPayments(
+        apikey=os.environ.get("ZBD_PAYMENTS_API_KEY"),  # This is the default and can be omitted
+        http_client=DefaultAioHttpClient(),
+    ) as client:
+        await client.lightning_address.send_payment(
+            amount="500000",
+            comment="Instant global payments",
+            ln_address="andreneves@zbd.gg",
+        )
+
+
+asyncio.run(main())
+```
+
 ## Using types
 
 Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typing.html#typing.TypedDict). Responses are [Pydantic models](https://docs.pydantic.dev) which also provide helper methods for things like:
@@ -82,16 +114,16 @@ Typed requests and responses provide autocomplete and documentation within your 
 
 ## Handling errors
 
-When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `zbdpay_payments_sdk.APIConnectionError` is raised.
+When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `zbdpay.APIConnectionError` is raised.
 
 When the API returns a non-success status code (that is, 4xx or 5xx
-response), a subclass of `zbdpay_payments_sdk.APIStatusError` is raised, containing `status_code` and `response` properties.
+response), a subclass of `zbdpay.APIStatusError` is raised, containing `status_code` and `response` properties.
 
-All errors inherit from `zbdpay_payments_sdk.APIError`.
+All errors inherit from `zbdpay.APIError`.
 
 ```python
-import zbdpay_payments_sdk
-from zbdpay_payments_sdk import ZbdPayments
+import zbdpay
+from zbdpay import ZbdPayments
 
 client = ZbdPayments()
 
@@ -101,12 +133,12 @@ try:
         comment="Instant global payments",
         ln_address="andreneves@zbd.gg",
     )
-except zbdpay_payments_sdk.APIConnectionError as e:
+except zbdpay.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
-except zbdpay_payments_sdk.RateLimitError as e:
+except zbdpay.RateLimitError as e:
     print("A 429 status code was received; we should back off a bit.")
-except zbdpay_payments_sdk.APIStatusError as e:
+except zbdpay.APIStatusError as e:
     print("Another non-200-range status code was received")
     print(e.status_code)
     print(e.response)
@@ -134,7 +166,7 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from zbdpay_payments_sdk import ZbdPayments
+from zbdpay import ZbdPayments
 
 # Configure the default for all requests:
 client = ZbdPayments(
@@ -153,10 +185,10 @@ client.with_options(max_retries=5).lightning_address.send_payment(
 ### Timeouts
 
 By default requests time out after 1 minute. You can configure this with a `timeout` option,
-which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
+which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
-from zbdpay_payments_sdk import ZbdPayments
+from zbdpay import ZbdPayments
 
 # Configure the default for all requests:
 client = ZbdPayments(
@@ -212,7 +244,7 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from zbdpay_payments_sdk import ZbdPayments
+from zbdpay import ZbdPayments
 
 client = ZbdPayments()
 response = client.lightning_address.with_raw_response.send_payment(
@@ -226,9 +258,9 @@ lightning_address = response.parse()  # get the object that `lightning_address.s
 print(lightning_address)
 ```
 
-These methods return an [`APIResponse`](https://github.com/stainless-sdks/zbd-payments-python/tree/main/src/zbdpay_payments_sdk/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/zbdpay/zbd-payments-python-sdk/tree/main/src/zbdpay/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/zbd-payments-python/tree/main/src/zbdpay_payments_sdk/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/zbdpay/zbd-payments-python-sdk/tree/main/src/zbdpay/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -294,7 +326,7 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 
 ```python
 import httpx
-from zbdpay_payments_sdk import ZbdPayments, DefaultHttpxClient
+from zbdpay import ZbdPayments, DefaultHttpxClient
 
 client = ZbdPayments(
     # Or use the `ZBD_PAYMENTS_BASE_URL` env var
@@ -317,7 +349,7 @@ client.with_options(http_client=DefaultHttpxClient(...))
 By default the library closes underlying HTTP connections whenever the client is [garbage collected](https://docs.python.org/3/reference/datamodel.html#object.__del__). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.
 
 ```py
-from zbdpay_payments_sdk import ZbdPayments
+from zbdpay import ZbdPayments
 
 with ZbdPayments() as client:
   # make requests here
@@ -336,7 +368,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/zbd-payments-python/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/zbdpay/zbd-payments-python-sdk/issues) with questions, bugs, or suggestions.
 
 ### Determining the installed version
 
@@ -345,8 +377,8 @@ If you've upgraded to the latest version but aren't seeing any new features you 
 You can determine the version that is being used at runtime with:
 
 ```py
-import zbdpay_payments_sdk
-print(zbdpay_payments_sdk.__version__)
+import zbdpay
+print(zbdpay.__version__)
 ```
 
 ## Requirements

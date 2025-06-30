@@ -8,15 +8,15 @@ from typing_extensions import Required, Annotated, TypedDict
 
 import pytest
 
-from zbdpay_payments_sdk._types import NOT_GIVEN, Base64FileInput
-from zbdpay_payments_sdk._utils import (
+from zbdpay._types import NOT_GIVEN, Base64FileInput
+from zbdpay._utils import (
     PropertyInfo,
     transform as _transform,
     parse_datetime,
     async_transform as _async_transform,
 )
-from zbdpay_payments_sdk._compat import PYDANTIC_V2
-from zbdpay_payments_sdk._models import BaseModel
+from zbdpay._compat import PYDANTIC_V2
+from zbdpay._models import BaseModel
 
 _T = TypeVar("_T")
 

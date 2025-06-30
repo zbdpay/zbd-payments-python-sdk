@@ -2,7 +2,7 @@ import operator
 from typing import Any
 from typing_extensions import override
 
-from zbdpay_payments_sdk._utils import LazyProxy
+from zbdpay._utils import LazyProxy
 
 
 class RecursiveLazyProxy(LazyProxy[Any]):
@@ -21,3 +21,14 @@ def test_recursive_proxy() -> None:
     assert dir(proxy) == []
     assert type(proxy).__name__ == "RecursiveLazyProxy"
     assert type(operator.attrgetter("name.foo.bar.baz")(proxy)).__name__ == "RecursiveLazyProxy"
+
+
+def test_isinstance_does_not_error() -> None:
+    class AlwaysErrorProxy(LazyProxy[Any]):
+        @override
+        def __load__(self) -> Any:
+            raise RuntimeError("Mocking missing dependency")
+
+    proxy = AlwaysErrorProxy()
+    assert not isinstance(proxy, dict)
+    assert isinstance(proxy, LazyProxy)

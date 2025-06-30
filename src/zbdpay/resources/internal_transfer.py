@@ -4,12 +4,9 @@ from __future__ import annotations
 
 import httpx
 
-from ..types import email_payment_send_params
+from ..types import internal_transfer_initiate_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
-from .._utils import (
-    maybe_transform,
-    async_maybe_transform,
-)
+from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -20,35 +17,34 @@ from .._response import (
 )
 from .._base_client import make_request_options
 
-__all__ = ["EmailPaymentsResource", "AsyncEmailPaymentsResource"]
+__all__ = ["InternalTransferResource", "AsyncInternalTransferResource"]
 
 
-class EmailPaymentsResource(SyncAPIResource):
+class InternalTransferResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> EmailPaymentsResourceWithRawResponse:
+    def with_raw_response(self) -> InternalTransferResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/zbd-payments-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/zbdpay/zbd-payments-python-sdk#accessing-raw-response-data-eg-headers
         """
-        return EmailPaymentsResourceWithRawResponse(self)
+        return InternalTransferResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> EmailPaymentsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> InternalTransferResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/zbd-payments-python#with_streaming_response
+        For more information, see https://www.github.com/zbdpay/zbd-payments-python-sdk#with_streaming_response
         """
-        return EmailPaymentsResourceWithStreamingResponse(self)
+        return InternalTransferResourceWithStreamingResponse(self)
 
-    def send(
+    def initiate(
         self,
         *,
         amount: str | NotGiven = NOT_GIVEN,
-        comment: str | NotGiven = NOT_GIVEN,
-        email: str | NotGiven = NOT_GIVEN,
+        receiver_wallet_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -57,14 +53,12 @@ class EmailPaymentsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Send instant Bitcoin payments to any email.
+        Performs a transfer of funds between two Projects.
 
         Args:
-          amount: The amount for the Payment -> in millisatoshis
+          amount: The amount to be transferred -> in millisatoshis
 
-          comment: Note / description of this Payment (may be shown to recipient)
-
-          email: The Email of the intended recipient (e.g. info@zebedee.io)
+          receiver_wallet_id: The Wallet ID of the recipient Project
 
           extra_headers: Send extra headers
 
@@ -76,14 +70,13 @@ class EmailPaymentsResource(SyncAPIResource):
         """
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            "/v0/email/send-payment",
+            "/v0/internal-transfer",
             body=maybe_transform(
                 {
                     "amount": amount,
-                    "comment": comment,
-                    "email": email,
+                    "receiver_wallet_id": receiver_wallet_id,
                 },
-                email_payment_send_params.EmailPaymentSendParams,
+                internal_transfer_initiate_params.InternalTransferInitiateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -92,32 +85,31 @@ class EmailPaymentsResource(SyncAPIResource):
         )
 
 
-class AsyncEmailPaymentsResource(AsyncAPIResource):
+class AsyncInternalTransferResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncEmailPaymentsResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncInternalTransferResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/zbd-payments-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/zbdpay/zbd-payments-python-sdk#accessing-raw-response-data-eg-headers
         """
-        return AsyncEmailPaymentsResourceWithRawResponse(self)
+        return AsyncInternalTransferResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncEmailPaymentsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncInternalTransferResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/zbd-payments-python#with_streaming_response
+        For more information, see https://www.github.com/zbdpay/zbd-payments-python-sdk#with_streaming_response
         """
-        return AsyncEmailPaymentsResourceWithStreamingResponse(self)
+        return AsyncInternalTransferResourceWithStreamingResponse(self)
 
-    async def send(
+    async def initiate(
         self,
         *,
         amount: str | NotGiven = NOT_GIVEN,
-        comment: str | NotGiven = NOT_GIVEN,
-        email: str | NotGiven = NOT_GIVEN,
+        receiver_wallet_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -126,14 +118,12 @@ class AsyncEmailPaymentsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Send instant Bitcoin payments to any email.
+        Performs a transfer of funds between two Projects.
 
         Args:
-          amount: The amount for the Payment -> in millisatoshis
+          amount: The amount to be transferred -> in millisatoshis
 
-          comment: Note / description of this Payment (may be shown to recipient)
-
-          email: The Email of the intended recipient (e.g. info@zebedee.io)
+          receiver_wallet_id: The Wallet ID of the recipient Project
 
           extra_headers: Send extra headers
 
@@ -145,14 +135,13 @@ class AsyncEmailPaymentsResource(AsyncAPIResource):
         """
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            "/v0/email/send-payment",
+            "/v0/internal-transfer",
             body=await async_maybe_transform(
                 {
                     "amount": amount,
-                    "comment": comment,
-                    "email": email,
+                    "receiver_wallet_id": receiver_wallet_id,
                 },
-                email_payment_send_params.EmailPaymentSendParams,
+                internal_transfer_initiate_params.InternalTransferInitiateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -161,37 +150,37 @@ class AsyncEmailPaymentsResource(AsyncAPIResource):
         )
 
 
-class EmailPaymentsResourceWithRawResponse:
-    def __init__(self, email_payments: EmailPaymentsResource) -> None:
-        self._email_payments = email_payments
+class InternalTransferResourceWithRawResponse:
+    def __init__(self, internal_transfer: InternalTransferResource) -> None:
+        self._internal_transfer = internal_transfer
 
-        self.send = to_raw_response_wrapper(
-            email_payments.send,
+        self.initiate = to_raw_response_wrapper(
+            internal_transfer.initiate,
         )
 
 
-class AsyncEmailPaymentsResourceWithRawResponse:
-    def __init__(self, email_payments: AsyncEmailPaymentsResource) -> None:
-        self._email_payments = email_payments
+class AsyncInternalTransferResourceWithRawResponse:
+    def __init__(self, internal_transfer: AsyncInternalTransferResource) -> None:
+        self._internal_transfer = internal_transfer
 
-        self.send = async_to_raw_response_wrapper(
-            email_payments.send,
+        self.initiate = async_to_raw_response_wrapper(
+            internal_transfer.initiate,
         )
 
 
-class EmailPaymentsResourceWithStreamingResponse:
-    def __init__(self, email_payments: EmailPaymentsResource) -> None:
-        self._email_payments = email_payments
+class InternalTransferResourceWithStreamingResponse:
+    def __init__(self, internal_transfer: InternalTransferResource) -> None:
+        self._internal_transfer = internal_transfer
 
-        self.send = to_streamed_response_wrapper(
-            email_payments.send,
+        self.initiate = to_streamed_response_wrapper(
+            internal_transfer.initiate,
         )
 
 
-class AsyncEmailPaymentsResourceWithStreamingResponse:
-    def __init__(self, email_payments: AsyncEmailPaymentsResource) -> None:
-        self._email_payments = email_payments
+class AsyncInternalTransferResourceWithStreamingResponse:
+    def __init__(self, internal_transfer: AsyncInternalTransferResource) -> None:
+        self._internal_transfer = internal_transfer
 
-        self.send = async_to_streamed_response_wrapper(
-            email_payments.send,
+        self.initiate = async_to_streamed_response_wrapper(
+            internal_transfer.initiate,
         )

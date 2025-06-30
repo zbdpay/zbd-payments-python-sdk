@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from zbdpay_payments_sdk import ZbdPayments, AsyncZbdPayments
+from zbdpay import ZbdPayments, AsyncZbdPayments
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -99,7 +99,9 @@ class TestLightningPayments:
 
 
 class TestAsyncLightningPayments:
-    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
+    parametrize = pytest.mark.parametrize(
+        "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
+    )
 
     @pytest.mark.skip()
     @parametrize

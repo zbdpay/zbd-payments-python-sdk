@@ -81,7 +81,7 @@ HttpxRequestFiles = Union[Mapping[str, HttpxFileTypes], Sequence[Tuple[str, Http
 # This unfortunately means that you will either have
 # to import this type and pass it explicitly:
 #
-# from zbdpay_payments_sdk import NoneType
+# from zbdpay import NoneType
 # client.get('/foo', cast_to=NoneType)
 #
 # or build it yourself:
@@ -100,6 +100,7 @@ class RequestOptions(TypedDict, total=False):
     params: Query
     extra_json: AnyMapping
     idempotency_key: str
+    follow_redirects: bool
 
 
 # Sentinel class used until PEP 0661 is accepted
@@ -215,3 +216,4 @@ class _GenericAlias(Protocol):
 
 class HttpxSendArgs(TypedDict, total=False):
     auth: httpx.Auth
+    follow_redirects: bool

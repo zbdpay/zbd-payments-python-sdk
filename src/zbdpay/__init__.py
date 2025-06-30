@@ -1,5 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import typing as _t
+
 from . import types
 from ._types import NOT_GIVEN, Omit, NoneType, NotGiven, Transport, ProxiesTypes
 from ._utils import file_from_path
@@ -34,7 +36,7 @@ from ._exceptions import (
     UnprocessableEntityError,
     APIResponseValidationError,
 )
-from ._base_client import DefaultHttpxClient, DefaultAsyncHttpxClient
+from ._base_client import DefaultHttpxClient, DefaultAioHttpClient, DefaultAsyncHttpxClient
 from ._utils._logs import setup_logging as _setup_logging
 
 __all__ = [
@@ -76,19 +78,23 @@ __all__ = [
     "DEFAULT_CONNECTION_LIMITS",
     "DefaultHttpxClient",
     "DefaultAsyncHttpxClient",
+    "DefaultAioHttpClient",
 ]
+
+if not _t.TYPE_CHECKING:
+    from ._utils._resources_proxy import resources as resources
 
 _setup_logging()
 
 # Update the __module__ attribute for exported symbols so that
 # error messages point to this module instead of the module
 # it was originally defined in, e.g.
-# zbdpay_payments_sdk._exceptions.NotFoundError -> zbdpay_payments_sdk.NotFoundError
+# zbdpay._exceptions.NotFoundError -> zbdpay.NotFoundError
 __locals = locals()
 for __name in __all__:
     if not __name.startswith("__"):
         try:
-            __locals[__name].__module__ = "zbdpay_payments_sdk"
+            __locals[__name].__module__ = "zbdpay"
         except (TypeError, AttributeError):
             # Some of our exported symbols are builtins which we can't set attributes for.
             pass
