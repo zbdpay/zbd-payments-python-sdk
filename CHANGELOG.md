@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.2 (2025-07-02)
+
+Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/zbdpay/zbd-payments-python-sdk/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
+
+### Chores
+
+* **ci:** change upload type ([9c44657](https://github.com/zbdpay/zbd-payments-python-sdk/commit/9c4465773de134e1ecacb494a4f3f3c5f174146b))
+
 ## 0.1.0-alpha.1 (2025-06-30)
 
 Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/zbdpay/zbd-payments-python-sdk/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)
