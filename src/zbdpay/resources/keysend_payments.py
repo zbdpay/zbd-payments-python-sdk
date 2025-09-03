@@ -2,12 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List
-
 import httpx
 
 from ..types import keysend_payment_send_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven, SequenceNotStr
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -49,7 +47,7 @@ class KeysendPaymentsResource(SyncAPIResource):
         callback_url: str | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
         pubkey: str | NotGiven = NOT_GIVEN,
-        tlv_records: List[str] | NotGiven = NOT_GIVEN,
+        tlv_records: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         value: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -132,7 +130,7 @@ class AsyncKeysendPaymentsResource(AsyncAPIResource):
         callback_url: str | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
         pubkey: str | NotGiven = NOT_GIVEN,
-        tlv_records: List[str] | NotGiven = NOT_GIVEN,
+        tlv_records: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         value: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
