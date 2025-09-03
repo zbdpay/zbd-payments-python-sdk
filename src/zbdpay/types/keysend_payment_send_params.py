@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from typing import List
 from typing_extensions import Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = ["KeysendPaymentSendParams"]
@@ -23,7 +23,7 @@ class KeysendPaymentSendParams(TypedDict, total=False):
     pubkey: str
     """The Public Key for the destination Lightning node"""
 
-    tlv_records: Annotated[List[str], PropertyInfo(alias="tlvRecords")]
+    tlv_records: Annotated[SequenceNotStr[str], PropertyInfo(alias="tlvRecords")]
     """
     List of TLV records <Expandable title="tlvRecord" defaultOpen>
     <ParamField body="type" type="number" initialValue={123456}> type of the TLV
