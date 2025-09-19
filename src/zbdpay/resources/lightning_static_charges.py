@@ -5,7 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ..types import lightning_static_charge_create_params, lightning_static_charge_update_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -43,20 +43,20 @@ class LightningStaticChargesResource(SyncAPIResource):
     def create(
         self,
         *,
-        allowed_slots: float | NotGiven = NOT_GIVEN,
-        callback_url: str | NotGiven = NOT_GIVEN,
-        description: str | NotGiven = NOT_GIVEN,
-        identifier: str | NotGiven = NOT_GIVEN,
-        internal_id: str | NotGiven = NOT_GIVEN,
-        max_amount: str | NotGiven = NOT_GIVEN,
-        min_amount: str | NotGiven = NOT_GIVEN,
-        success_message: str | NotGiven = NOT_GIVEN,
+        allowed_slots: float | Omit = omit,
+        callback_url: str | Omit = omit,
+        description: str | Omit = omit,
+        identifier: str | Omit = omit,
+        internal_id: str | Omit = omit,
+        max_amount: str | Omit = omit,
+        min_amount: str | Omit = omit,
+        success_message: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Start accepting payments on Lightning with Static QR codes.
@@ -117,7 +117,7 @@ class LightningStaticChargesResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Retrieve all data about a single Static Charge.
@@ -146,19 +146,19 @@ class LightningStaticChargesResource(SyncAPIResource):
         self,
         id: str,
         *,
-        allowed_slots: float | NotGiven = NOT_GIVEN,
-        callback_url: str | NotGiven = NOT_GIVEN,
-        description: str | NotGiven = NOT_GIVEN,
-        internal_id: str | NotGiven = NOT_GIVEN,
-        max_amount: str | NotGiven = NOT_GIVEN,
-        min_amount: str | NotGiven = NOT_GIVEN,
-        success_message: str | NotGiven = NOT_GIVEN,
+        allowed_slots: float | Omit = omit,
+        callback_url: str | Omit = omit,
+        description: str | Omit = omit,
+        internal_id: str | Omit = omit,
+        max_amount: str | Omit = omit,
+        min_amount: str | Omit = omit,
+        success_message: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Change the configuration of a Static Charge QR code.
@@ -233,20 +233,20 @@ class AsyncLightningStaticChargesResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        allowed_slots: float | NotGiven = NOT_GIVEN,
-        callback_url: str | NotGiven = NOT_GIVEN,
-        description: str | NotGiven = NOT_GIVEN,
-        identifier: str | NotGiven = NOT_GIVEN,
-        internal_id: str | NotGiven = NOT_GIVEN,
-        max_amount: str | NotGiven = NOT_GIVEN,
-        min_amount: str | NotGiven = NOT_GIVEN,
-        success_message: str | NotGiven = NOT_GIVEN,
+        allowed_slots: float | Omit = omit,
+        callback_url: str | Omit = omit,
+        description: str | Omit = omit,
+        identifier: str | Omit = omit,
+        internal_id: str | Omit = omit,
+        max_amount: str | Omit = omit,
+        min_amount: str | Omit = omit,
+        success_message: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Start accepting payments on Lightning with Static QR codes.
@@ -307,7 +307,7 @@ class AsyncLightningStaticChargesResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Retrieve all data about a single Static Charge.
@@ -336,19 +336,19 @@ class AsyncLightningStaticChargesResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        allowed_slots: float | NotGiven = NOT_GIVEN,
-        callback_url: str | NotGiven = NOT_GIVEN,
-        description: str | NotGiven = NOT_GIVEN,
-        internal_id: str | NotGiven = NOT_GIVEN,
-        max_amount: str | NotGiven = NOT_GIVEN,
-        min_amount: str | NotGiven = NOT_GIVEN,
-        success_message: str | NotGiven = NOT_GIVEN,
+        allowed_slots: float | Omit = omit,
+        callback_url: str | Omit = omit,
+        description: str | Omit = omit,
+        internal_id: str | Omit = omit,
+        max_amount: str | Omit = omit,
+        min_amount: str | Omit = omit,
+        success_message: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Change the configuration of a Static Charge QR code.

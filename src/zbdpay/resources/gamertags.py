@@ -5,7 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ..types import gamertag_send_payment_params, gamertag_create_charge_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -43,18 +43,18 @@ class GamertagsResource(SyncAPIResource):
     def create_charge(
         self,
         *,
-        amount: str | NotGiven = NOT_GIVEN,
-        callback_url: str | NotGiven = NOT_GIVEN,
-        description: str | NotGiven = NOT_GIVEN,
-        expires_in: float | NotGiven = NOT_GIVEN,
-        gamertag: str | NotGiven = NOT_GIVEN,
-        internal_id: str | NotGiven = NOT_GIVEN,
+        amount: str | Omit = omit,
+        callback_url: str | Omit = omit,
+        description: str | Omit = omit,
+        expires_in: float | Omit = omit,
+        gamertag: str | Omit = omit,
+        internal_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Generate a payment request for a ZBD User.
@@ -109,7 +109,7 @@ class GamertagsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Retrieve Gamertag from a ZBD user ID.
@@ -143,7 +143,7 @@ class GamertagsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Retrieve ZBD user ID from a Gamertag.
@@ -177,7 +177,7 @@ class GamertagsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Retrieve all data about a Payment sent to ZBD User.
@@ -205,15 +205,15 @@ class GamertagsResource(SyncAPIResource):
     def send_payment(
         self,
         *,
-        amount: str | NotGiven = NOT_GIVEN,
-        description: str | NotGiven = NOT_GIVEN,
-        gamertag: str | NotGiven = NOT_GIVEN,
+        amount: str | Omit = omit,
+        description: str | Omit = omit,
+        gamertag: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Send instant Bitcoin payments to ZBD Users.
@@ -274,18 +274,18 @@ class AsyncGamertagsResource(AsyncAPIResource):
     async def create_charge(
         self,
         *,
-        amount: str | NotGiven = NOT_GIVEN,
-        callback_url: str | NotGiven = NOT_GIVEN,
-        description: str | NotGiven = NOT_GIVEN,
-        expires_in: float | NotGiven = NOT_GIVEN,
-        gamertag: str | NotGiven = NOT_GIVEN,
-        internal_id: str | NotGiven = NOT_GIVEN,
+        amount: str | Omit = omit,
+        callback_url: str | Omit = omit,
+        description: str | Omit = omit,
+        expires_in: float | Omit = omit,
+        gamertag: str | Omit = omit,
+        internal_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Generate a payment request for a ZBD User.
@@ -340,7 +340,7 @@ class AsyncGamertagsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Retrieve Gamertag from a ZBD user ID.
@@ -374,7 +374,7 @@ class AsyncGamertagsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Retrieve ZBD user ID from a Gamertag.
@@ -408,7 +408,7 @@ class AsyncGamertagsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Retrieve all data about a Payment sent to ZBD User.
@@ -436,15 +436,15 @@ class AsyncGamertagsResource(AsyncAPIResource):
     async def send_payment(
         self,
         *,
-        amount: str | NotGiven = NOT_GIVEN,
-        description: str | NotGiven = NOT_GIVEN,
-        gamertag: str | NotGiven = NOT_GIVEN,
+        amount: str | Omit = omit,
+        description: str | Omit = omit,
+        gamertag: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Send instant Bitcoin payments to ZBD Users.
