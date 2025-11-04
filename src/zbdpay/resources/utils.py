@@ -5,7 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ..types import util_decode_lightning_charge_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -49,7 +49,7 @@ class UtilsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Verify if a user is coming from a supported region.
@@ -77,13 +77,13 @@ class UtilsResource(SyncAPIResource):
     def decode_lightning_charge(
         self,
         *,
-        invoice: str | NotGiven = NOT_GIVEN,
+        invoice: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Understand the inner properties of a Charge QR code.
@@ -119,7 +119,7 @@ class UtilsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """Get the official IP addresses of ZBD servers."""
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
@@ -139,7 +139,7 @@ class UtilsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """Get the latest price for Bitcoin in US Dollars."""
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
@@ -181,7 +181,7 @@ class AsyncUtilsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Verify if a user is coming from a supported region.
@@ -209,13 +209,13 @@ class AsyncUtilsResource(AsyncAPIResource):
     async def decode_lightning_charge(
         self,
         *,
-        invoice: str | NotGiven = NOT_GIVEN,
+        invoice: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Understand the inner properties of a Charge QR code.
@@ -251,7 +251,7 @@ class AsyncUtilsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """Get the official IP addresses of ZBD servers."""
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
@@ -271,7 +271,7 @@ class AsyncUtilsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """Get the latest price for Bitcoin in US Dollars."""
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}

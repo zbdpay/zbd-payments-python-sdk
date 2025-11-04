@@ -5,7 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ..types import lightning_address_send_payment_params, lightning_address_create_charge_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -43,15 +43,15 @@ class LightningAddressResource(SyncAPIResource):
     def create_charge(
         self,
         *,
-        amount: str | NotGiven = NOT_GIVEN,
-        description: str | NotGiven = NOT_GIVEN,
-        lnaddress: str | NotGiven = NOT_GIVEN,
+        amount: str | Omit = omit,
+        description: str | Omit = omit,
+        lnaddress: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Generate a payment request for a Lightning Address.
@@ -91,17 +91,17 @@ class LightningAddressResource(SyncAPIResource):
     def send_payment(
         self,
         *,
-        amount: str | NotGiven = NOT_GIVEN,
-        callback_url: str | NotGiven = NOT_GIVEN,
-        comment: str | NotGiven = NOT_GIVEN,
-        internal_id: str | NotGiven = NOT_GIVEN,
-        ln_address: str | NotGiven = NOT_GIVEN,
+        amount: str | Omit = omit,
+        callback_url: str | Omit = omit,
+        comment: str | Omit = omit,
+        internal_id: str | Omit = omit,
+        ln_address: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Send instant Bitcoin payments to any Lightning Address.
@@ -153,7 +153,7 @@ class LightningAddressResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Verify the validity of a Lightning Address.
@@ -202,15 +202,15 @@ class AsyncLightningAddressResource(AsyncAPIResource):
     async def create_charge(
         self,
         *,
-        amount: str | NotGiven = NOT_GIVEN,
-        description: str | NotGiven = NOT_GIVEN,
-        lnaddress: str | NotGiven = NOT_GIVEN,
+        amount: str | Omit = omit,
+        description: str | Omit = omit,
+        lnaddress: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Generate a payment request for a Lightning Address.
@@ -250,17 +250,17 @@ class AsyncLightningAddressResource(AsyncAPIResource):
     async def send_payment(
         self,
         *,
-        amount: str | NotGiven = NOT_GIVEN,
-        callback_url: str | NotGiven = NOT_GIVEN,
-        comment: str | NotGiven = NOT_GIVEN,
-        internal_id: str | NotGiven = NOT_GIVEN,
-        ln_address: str | NotGiven = NOT_GIVEN,
+        amount: str | Omit = omit,
+        callback_url: str | Omit = omit,
+        comment: str | Omit = omit,
+        internal_id: str | Omit = omit,
+        ln_address: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Send instant Bitcoin payments to any Lightning Address.
@@ -312,7 +312,7 @@ class AsyncLightningAddressResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Verify the validity of a Lightning Address.

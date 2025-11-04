@@ -2,12 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List
-
 import httpx
 
 from ..types import keysend_payment_send_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -45,18 +43,18 @@ class KeysendPaymentsResource(SyncAPIResource):
     def send(
         self,
         *,
-        amount: str | NotGiven = NOT_GIVEN,
-        callback_url: str | NotGiven = NOT_GIVEN,
-        metadata: object | NotGiven = NOT_GIVEN,
-        pubkey: str | NotGiven = NOT_GIVEN,
-        tlv_records: List[str] | NotGiven = NOT_GIVEN,
-        value: str | NotGiven = NOT_GIVEN,
+        amount: str | Omit = omit,
+        callback_url: str | Omit = omit,
+        metadata: object | Omit = omit,
+        pubkey: str | Omit = omit,
+        tlv_records: SequenceNotStr[str] | Omit = omit,
+        value: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Start sending Keysend payments on the Lightning Network.
@@ -128,18 +126,18 @@ class AsyncKeysendPaymentsResource(AsyncAPIResource):
     async def send(
         self,
         *,
-        amount: str | NotGiven = NOT_GIVEN,
-        callback_url: str | NotGiven = NOT_GIVEN,
-        metadata: object | NotGiven = NOT_GIVEN,
-        pubkey: str | NotGiven = NOT_GIVEN,
-        tlv_records: List[str] | NotGiven = NOT_GIVEN,
-        value: str | NotGiven = NOT_GIVEN,
+        amount: str | Omit = omit,
+        callback_url: str | Omit = omit,
+        metadata: object | Omit = omit,
+        pubkey: str | Omit = omit,
+        tlv_records: SequenceNotStr[str] | Omit = omit,
+        value: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Start sending Keysend payments on the Lightning Network.

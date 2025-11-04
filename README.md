@@ -1,6 +1,7 @@
 # ZBD Payments Python API library
 
-[![PyPI version](<https://img.shields.io/pypi/v/zbdpay.svg?label=pypi%20(stable)>)](https://pypi.org/project/zbdpay/)
+<!-- prettier-ignore -->
+[![PyPI version](https://img.shields.io/pypi/v/zbdpay.svg?label=pypi%20(stable))](https://pypi.org/project/zbdpay/)
 
 The ZBD Payments Python library provides convenient access to the ZBD Payments REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
@@ -82,7 +83,6 @@ pip install --pre zbdpay[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
-import os
 import asyncio
 from zbdpay import DefaultAioHttpClient
 from zbdpay import AsyncZbdPayments
@@ -90,7 +90,7 @@ from zbdpay import AsyncZbdPayments
 
 async def main() -> None:
     async with AsyncZbdPayments(
-        apikey=os.environ.get("ZBD_PAYMENTS_API_KEY"),  # This is the default and can be omitted
+        apikey="My Apikey",
         http_client=DefaultAioHttpClient(),
     ) as client:
         await client.lightning_address.send_payment(
