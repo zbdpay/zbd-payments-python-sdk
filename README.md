@@ -83,6 +83,7 @@ pip install --pre zbdpay[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
+import os
 import asyncio
 from zbdpay import DefaultAioHttpClient
 from zbdpay import AsyncZbdPayments
@@ -90,7 +91,7 @@ from zbdpay import AsyncZbdPayments
 
 async def main() -> None:
     async with AsyncZbdPayments(
-        apikey="My Apikey",
+        apikey=os.environ.get("ZBD_PAYMENTS_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
         await client.lightning_address.send_payment(
