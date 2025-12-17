@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Mapping
+from typing import TYPE_CHECKING, Any, Mapping
 from typing_extensions import Self, override
 
 import httpx
@@ -21,22 +21,8 @@ from ._types import (
     not_given,
 )
 from ._utils import is_given, get_async_library
+from ._compat import cached_property
 from ._version import __version__
-from .resources import (
-    utils,
-    oauth2,
-    wallet,
-    vouchers,
-    gamertags,
-    email_payments,
-    keysend_payments,
-    internal_transfer,
-    lightning_address,
-    lightning_charges,
-    lightning_payments,
-    withdrawal_requests,
-    lightning_static_charges,
-)
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError
 from ._base_client import (
@@ -44,6 +30,36 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
+
+if TYPE_CHECKING:
+    from .resources import (
+        utils,
+        oauth2,
+        wallet,
+        vouchers,
+        gamertags,
+        email_payments,
+        keysend_payments,
+        internal_transfer,
+        lightning_address,
+        lightning_charges,
+        lightning_payments,
+        withdrawal_requests,
+        lightning_static_charges,
+    )
+    from .resources.utils import UtilsResource, AsyncUtilsResource
+    from .resources.oauth2 import Oauth2Resource, AsyncOauth2Resource
+    from .resources.wallet import WalletResource, AsyncWalletResource
+    from .resources.vouchers import VouchersResource, AsyncVouchersResource
+    from .resources.gamertags import GamertagsResource, AsyncGamertagsResource
+    from .resources.email_payments import EmailPaymentsResource, AsyncEmailPaymentsResource
+    from .resources.keysend_payments import KeysendPaymentsResource, AsyncKeysendPaymentsResource
+    from .resources.internal_transfer import InternalTransferResource, AsyncInternalTransferResource
+    from .resources.lightning_address import LightningAddressResource, AsyncLightningAddressResource
+    from .resources.lightning_charges import LightningChargesResource, AsyncLightningChargesResource
+    from .resources.lightning_payments import LightningPaymentsResource, AsyncLightningPaymentsResource
+    from .resources.withdrawal_requests import WithdrawalRequestsResource, AsyncWithdrawalRequestsResource
+    from .resources.lightning_static_charges import LightningStaticChargesResource, AsyncLightningStaticChargesResource
 
 __all__ = [
     "Timeout",
@@ -58,22 +74,6 @@ __all__ = [
 
 
 class ZbdPayments(SyncAPIClient):
-    gamertags: gamertags.GamertagsResource
-    lightning_charges: lightning_charges.LightningChargesResource
-    internal_transfer: internal_transfer.InternalTransferResource
-    lightning_address: lightning_address.LightningAddressResource
-    lightning_static_charges: lightning_static_charges.LightningStaticChargesResource
-    vouchers: vouchers.VouchersResource
-    withdrawal_requests: withdrawal_requests.WithdrawalRequestsResource
-    lightning_payments: lightning_payments.LightningPaymentsResource
-    wallet: wallet.WalletResource
-    utils: utils.UtilsResource
-    oauth2: oauth2.Oauth2Resource
-    keysend_payments: keysend_payments.KeysendPaymentsResource
-    email_payments: email_payments.EmailPaymentsResource
-    with_raw_response: ZbdPaymentsWithRawResponse
-    with_streaming_response: ZbdPaymentsWithStreamedResponse
-
     # client options
     apikey: str | None
 
@@ -124,21 +124,91 @@ class ZbdPayments(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.gamertags = gamertags.GamertagsResource(self)
-        self.lightning_charges = lightning_charges.LightningChargesResource(self)
-        self.internal_transfer = internal_transfer.InternalTransferResource(self)
-        self.lightning_address = lightning_address.LightningAddressResource(self)
-        self.lightning_static_charges = lightning_static_charges.LightningStaticChargesResource(self)
-        self.vouchers = vouchers.VouchersResource(self)
-        self.withdrawal_requests = withdrawal_requests.WithdrawalRequestsResource(self)
-        self.lightning_payments = lightning_payments.LightningPaymentsResource(self)
-        self.wallet = wallet.WalletResource(self)
-        self.utils = utils.UtilsResource(self)
-        self.oauth2 = oauth2.Oauth2Resource(self)
-        self.keysend_payments = keysend_payments.KeysendPaymentsResource(self)
-        self.email_payments = email_payments.EmailPaymentsResource(self)
-        self.with_raw_response = ZbdPaymentsWithRawResponse(self)
-        self.with_streaming_response = ZbdPaymentsWithStreamedResponse(self)
+    @cached_property
+    def gamertags(self) -> GamertagsResource:
+        from .resources.gamertags import GamertagsResource
+
+        return GamertagsResource(self)
+
+    @cached_property
+    def lightning_charges(self) -> LightningChargesResource:
+        from .resources.lightning_charges import LightningChargesResource
+
+        return LightningChargesResource(self)
+
+    @cached_property
+    def internal_transfer(self) -> InternalTransferResource:
+        from .resources.internal_transfer import InternalTransferResource
+
+        return InternalTransferResource(self)
+
+    @cached_property
+    def lightning_address(self) -> LightningAddressResource:
+        from .resources.lightning_address import LightningAddressResource
+
+        return LightningAddressResource(self)
+
+    @cached_property
+    def lightning_static_charges(self) -> LightningStaticChargesResource:
+        from .resources.lightning_static_charges import LightningStaticChargesResource
+
+        return LightningStaticChargesResource(self)
+
+    @cached_property
+    def vouchers(self) -> VouchersResource:
+        from .resources.vouchers import VouchersResource
+
+        return VouchersResource(self)
+
+    @cached_property
+    def withdrawal_requests(self) -> WithdrawalRequestsResource:
+        from .resources.withdrawal_requests import WithdrawalRequestsResource
+
+        return WithdrawalRequestsResource(self)
+
+    @cached_property
+    def lightning_payments(self) -> LightningPaymentsResource:
+        from .resources.lightning_payments import LightningPaymentsResource
+
+        return LightningPaymentsResource(self)
+
+    @cached_property
+    def wallet(self) -> WalletResource:
+        from .resources.wallet import WalletResource
+
+        return WalletResource(self)
+
+    @cached_property
+    def utils(self) -> UtilsResource:
+        from .resources.utils import UtilsResource
+
+        return UtilsResource(self)
+
+    @cached_property
+    def oauth2(self) -> Oauth2Resource:
+        from .resources.oauth2 import Oauth2Resource
+
+        return Oauth2Resource(self)
+
+    @cached_property
+    def keysend_payments(self) -> KeysendPaymentsResource:
+        from .resources.keysend_payments import KeysendPaymentsResource
+
+        return KeysendPaymentsResource(self)
+
+    @cached_property
+    def email_payments(self) -> EmailPaymentsResource:
+        from .resources.email_payments import EmailPaymentsResource
+
+        return EmailPaymentsResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> ZbdPaymentsWithRawResponse:
+        return ZbdPaymentsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> ZbdPaymentsWithStreamedResponse:
+        return ZbdPaymentsWithStreamedResponse(self)
 
     @property
     @override
@@ -259,22 +329,6 @@ class ZbdPayments(SyncAPIClient):
 
 
 class AsyncZbdPayments(AsyncAPIClient):
-    gamertags: gamertags.AsyncGamertagsResource
-    lightning_charges: lightning_charges.AsyncLightningChargesResource
-    internal_transfer: internal_transfer.AsyncInternalTransferResource
-    lightning_address: lightning_address.AsyncLightningAddressResource
-    lightning_static_charges: lightning_static_charges.AsyncLightningStaticChargesResource
-    vouchers: vouchers.AsyncVouchersResource
-    withdrawal_requests: withdrawal_requests.AsyncWithdrawalRequestsResource
-    lightning_payments: lightning_payments.AsyncLightningPaymentsResource
-    wallet: wallet.AsyncWalletResource
-    utils: utils.AsyncUtilsResource
-    oauth2: oauth2.AsyncOauth2Resource
-    keysend_payments: keysend_payments.AsyncKeysendPaymentsResource
-    email_payments: email_payments.AsyncEmailPaymentsResource
-    with_raw_response: AsyncZbdPaymentsWithRawResponse
-    with_streaming_response: AsyncZbdPaymentsWithStreamedResponse
-
     # client options
     apikey: str | None
 
@@ -325,21 +379,91 @@ class AsyncZbdPayments(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.gamertags = gamertags.AsyncGamertagsResource(self)
-        self.lightning_charges = lightning_charges.AsyncLightningChargesResource(self)
-        self.internal_transfer = internal_transfer.AsyncInternalTransferResource(self)
-        self.lightning_address = lightning_address.AsyncLightningAddressResource(self)
-        self.lightning_static_charges = lightning_static_charges.AsyncLightningStaticChargesResource(self)
-        self.vouchers = vouchers.AsyncVouchersResource(self)
-        self.withdrawal_requests = withdrawal_requests.AsyncWithdrawalRequestsResource(self)
-        self.lightning_payments = lightning_payments.AsyncLightningPaymentsResource(self)
-        self.wallet = wallet.AsyncWalletResource(self)
-        self.utils = utils.AsyncUtilsResource(self)
-        self.oauth2 = oauth2.AsyncOauth2Resource(self)
-        self.keysend_payments = keysend_payments.AsyncKeysendPaymentsResource(self)
-        self.email_payments = email_payments.AsyncEmailPaymentsResource(self)
-        self.with_raw_response = AsyncZbdPaymentsWithRawResponse(self)
-        self.with_streaming_response = AsyncZbdPaymentsWithStreamedResponse(self)
+    @cached_property
+    def gamertags(self) -> AsyncGamertagsResource:
+        from .resources.gamertags import AsyncGamertagsResource
+
+        return AsyncGamertagsResource(self)
+
+    @cached_property
+    def lightning_charges(self) -> AsyncLightningChargesResource:
+        from .resources.lightning_charges import AsyncLightningChargesResource
+
+        return AsyncLightningChargesResource(self)
+
+    @cached_property
+    def internal_transfer(self) -> AsyncInternalTransferResource:
+        from .resources.internal_transfer import AsyncInternalTransferResource
+
+        return AsyncInternalTransferResource(self)
+
+    @cached_property
+    def lightning_address(self) -> AsyncLightningAddressResource:
+        from .resources.lightning_address import AsyncLightningAddressResource
+
+        return AsyncLightningAddressResource(self)
+
+    @cached_property
+    def lightning_static_charges(self) -> AsyncLightningStaticChargesResource:
+        from .resources.lightning_static_charges import AsyncLightningStaticChargesResource
+
+        return AsyncLightningStaticChargesResource(self)
+
+    @cached_property
+    def vouchers(self) -> AsyncVouchersResource:
+        from .resources.vouchers import AsyncVouchersResource
+
+        return AsyncVouchersResource(self)
+
+    @cached_property
+    def withdrawal_requests(self) -> AsyncWithdrawalRequestsResource:
+        from .resources.withdrawal_requests import AsyncWithdrawalRequestsResource
+
+        return AsyncWithdrawalRequestsResource(self)
+
+    @cached_property
+    def lightning_payments(self) -> AsyncLightningPaymentsResource:
+        from .resources.lightning_payments import AsyncLightningPaymentsResource
+
+        return AsyncLightningPaymentsResource(self)
+
+    @cached_property
+    def wallet(self) -> AsyncWalletResource:
+        from .resources.wallet import AsyncWalletResource
+
+        return AsyncWalletResource(self)
+
+    @cached_property
+    def utils(self) -> AsyncUtilsResource:
+        from .resources.utils import AsyncUtilsResource
+
+        return AsyncUtilsResource(self)
+
+    @cached_property
+    def oauth2(self) -> AsyncOauth2Resource:
+        from .resources.oauth2 import AsyncOauth2Resource
+
+        return AsyncOauth2Resource(self)
+
+    @cached_property
+    def keysend_payments(self) -> AsyncKeysendPaymentsResource:
+        from .resources.keysend_payments import AsyncKeysendPaymentsResource
+
+        return AsyncKeysendPaymentsResource(self)
+
+    @cached_property
+    def email_payments(self) -> AsyncEmailPaymentsResource:
+        from .resources.email_payments import AsyncEmailPaymentsResource
+
+        return AsyncEmailPaymentsResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncZbdPaymentsWithRawResponse:
+        return AsyncZbdPaymentsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncZbdPaymentsWithStreamedResponse:
+        return AsyncZbdPaymentsWithStreamedResponse(self)
 
     @property
     @override
@@ -460,115 +584,345 @@ class AsyncZbdPayments(AsyncAPIClient):
 
 
 class ZbdPaymentsWithRawResponse:
+    _client: ZbdPayments
+
     def __init__(self, client: ZbdPayments) -> None:
-        self.gamertags = gamertags.GamertagsResourceWithRawResponse(client.gamertags)
-        self.lightning_charges = lightning_charges.LightningChargesResourceWithRawResponse(client.lightning_charges)
-        self.internal_transfer = internal_transfer.InternalTransferResourceWithRawResponse(client.internal_transfer)
-        self.lightning_address = lightning_address.LightningAddressResourceWithRawResponse(client.lightning_address)
-        self.lightning_static_charges = lightning_static_charges.LightningStaticChargesResourceWithRawResponse(
-            client.lightning_static_charges
-        )
-        self.vouchers = vouchers.VouchersResourceWithRawResponse(client.vouchers)
-        self.withdrawal_requests = withdrawal_requests.WithdrawalRequestsResourceWithRawResponse(
-            client.withdrawal_requests
-        )
-        self.lightning_payments = lightning_payments.LightningPaymentsResourceWithRawResponse(client.lightning_payments)
-        self.wallet = wallet.WalletResourceWithRawResponse(client.wallet)
-        self.utils = utils.UtilsResourceWithRawResponse(client.utils)
-        self.oauth2 = oauth2.Oauth2ResourceWithRawResponse(client.oauth2)
-        self.keysend_payments = keysend_payments.KeysendPaymentsResourceWithRawResponse(client.keysend_payments)
-        self.email_payments = email_payments.EmailPaymentsResourceWithRawResponse(client.email_payments)
+        self._client = client
+
+    @cached_property
+    def gamertags(self) -> gamertags.GamertagsResourceWithRawResponse:
+        from .resources.gamertags import GamertagsResourceWithRawResponse
+
+        return GamertagsResourceWithRawResponse(self._client.gamertags)
+
+    @cached_property
+    def lightning_charges(self) -> lightning_charges.LightningChargesResourceWithRawResponse:
+        from .resources.lightning_charges import LightningChargesResourceWithRawResponse
+
+        return LightningChargesResourceWithRawResponse(self._client.lightning_charges)
+
+    @cached_property
+    def internal_transfer(self) -> internal_transfer.InternalTransferResourceWithRawResponse:
+        from .resources.internal_transfer import InternalTransferResourceWithRawResponse
+
+        return InternalTransferResourceWithRawResponse(self._client.internal_transfer)
+
+    @cached_property
+    def lightning_address(self) -> lightning_address.LightningAddressResourceWithRawResponse:
+        from .resources.lightning_address import LightningAddressResourceWithRawResponse
+
+        return LightningAddressResourceWithRawResponse(self._client.lightning_address)
+
+    @cached_property
+    def lightning_static_charges(self) -> lightning_static_charges.LightningStaticChargesResourceWithRawResponse:
+        from .resources.lightning_static_charges import LightningStaticChargesResourceWithRawResponse
+
+        return LightningStaticChargesResourceWithRawResponse(self._client.lightning_static_charges)
+
+    @cached_property
+    def vouchers(self) -> vouchers.VouchersResourceWithRawResponse:
+        from .resources.vouchers import VouchersResourceWithRawResponse
+
+        return VouchersResourceWithRawResponse(self._client.vouchers)
+
+    @cached_property
+    def withdrawal_requests(self) -> withdrawal_requests.WithdrawalRequestsResourceWithRawResponse:
+        from .resources.withdrawal_requests import WithdrawalRequestsResourceWithRawResponse
+
+        return WithdrawalRequestsResourceWithRawResponse(self._client.withdrawal_requests)
+
+    @cached_property
+    def lightning_payments(self) -> lightning_payments.LightningPaymentsResourceWithRawResponse:
+        from .resources.lightning_payments import LightningPaymentsResourceWithRawResponse
+
+        return LightningPaymentsResourceWithRawResponse(self._client.lightning_payments)
+
+    @cached_property
+    def wallet(self) -> wallet.WalletResourceWithRawResponse:
+        from .resources.wallet import WalletResourceWithRawResponse
+
+        return WalletResourceWithRawResponse(self._client.wallet)
+
+    @cached_property
+    def utils(self) -> utils.UtilsResourceWithRawResponse:
+        from .resources.utils import UtilsResourceWithRawResponse
+
+        return UtilsResourceWithRawResponse(self._client.utils)
+
+    @cached_property
+    def oauth2(self) -> oauth2.Oauth2ResourceWithRawResponse:
+        from .resources.oauth2 import Oauth2ResourceWithRawResponse
+
+        return Oauth2ResourceWithRawResponse(self._client.oauth2)
+
+    @cached_property
+    def keysend_payments(self) -> keysend_payments.KeysendPaymentsResourceWithRawResponse:
+        from .resources.keysend_payments import KeysendPaymentsResourceWithRawResponse
+
+        return KeysendPaymentsResourceWithRawResponse(self._client.keysend_payments)
+
+    @cached_property
+    def email_payments(self) -> email_payments.EmailPaymentsResourceWithRawResponse:
+        from .resources.email_payments import EmailPaymentsResourceWithRawResponse
+
+        return EmailPaymentsResourceWithRawResponse(self._client.email_payments)
 
 
 class AsyncZbdPaymentsWithRawResponse:
+    _client: AsyncZbdPayments
+
     def __init__(self, client: AsyncZbdPayments) -> None:
-        self.gamertags = gamertags.AsyncGamertagsResourceWithRawResponse(client.gamertags)
-        self.lightning_charges = lightning_charges.AsyncLightningChargesResourceWithRawResponse(
-            client.lightning_charges
-        )
-        self.internal_transfer = internal_transfer.AsyncInternalTransferResourceWithRawResponse(
-            client.internal_transfer
-        )
-        self.lightning_address = lightning_address.AsyncLightningAddressResourceWithRawResponse(
-            client.lightning_address
-        )
-        self.lightning_static_charges = lightning_static_charges.AsyncLightningStaticChargesResourceWithRawResponse(
-            client.lightning_static_charges
-        )
-        self.vouchers = vouchers.AsyncVouchersResourceWithRawResponse(client.vouchers)
-        self.withdrawal_requests = withdrawal_requests.AsyncWithdrawalRequestsResourceWithRawResponse(
-            client.withdrawal_requests
-        )
-        self.lightning_payments = lightning_payments.AsyncLightningPaymentsResourceWithRawResponse(
-            client.lightning_payments
-        )
-        self.wallet = wallet.AsyncWalletResourceWithRawResponse(client.wallet)
-        self.utils = utils.AsyncUtilsResourceWithRawResponse(client.utils)
-        self.oauth2 = oauth2.AsyncOauth2ResourceWithRawResponse(client.oauth2)
-        self.keysend_payments = keysend_payments.AsyncKeysendPaymentsResourceWithRawResponse(client.keysend_payments)
-        self.email_payments = email_payments.AsyncEmailPaymentsResourceWithRawResponse(client.email_payments)
+        self._client = client
+
+    @cached_property
+    def gamertags(self) -> gamertags.AsyncGamertagsResourceWithRawResponse:
+        from .resources.gamertags import AsyncGamertagsResourceWithRawResponse
+
+        return AsyncGamertagsResourceWithRawResponse(self._client.gamertags)
+
+    @cached_property
+    def lightning_charges(self) -> lightning_charges.AsyncLightningChargesResourceWithRawResponse:
+        from .resources.lightning_charges import AsyncLightningChargesResourceWithRawResponse
+
+        return AsyncLightningChargesResourceWithRawResponse(self._client.lightning_charges)
+
+    @cached_property
+    def internal_transfer(self) -> internal_transfer.AsyncInternalTransferResourceWithRawResponse:
+        from .resources.internal_transfer import AsyncInternalTransferResourceWithRawResponse
+
+        return AsyncInternalTransferResourceWithRawResponse(self._client.internal_transfer)
+
+    @cached_property
+    def lightning_address(self) -> lightning_address.AsyncLightningAddressResourceWithRawResponse:
+        from .resources.lightning_address import AsyncLightningAddressResourceWithRawResponse
+
+        return AsyncLightningAddressResourceWithRawResponse(self._client.lightning_address)
+
+    @cached_property
+    def lightning_static_charges(self) -> lightning_static_charges.AsyncLightningStaticChargesResourceWithRawResponse:
+        from .resources.lightning_static_charges import AsyncLightningStaticChargesResourceWithRawResponse
+
+        return AsyncLightningStaticChargesResourceWithRawResponse(self._client.lightning_static_charges)
+
+    @cached_property
+    def vouchers(self) -> vouchers.AsyncVouchersResourceWithRawResponse:
+        from .resources.vouchers import AsyncVouchersResourceWithRawResponse
+
+        return AsyncVouchersResourceWithRawResponse(self._client.vouchers)
+
+    @cached_property
+    def withdrawal_requests(self) -> withdrawal_requests.AsyncWithdrawalRequestsResourceWithRawResponse:
+        from .resources.withdrawal_requests import AsyncWithdrawalRequestsResourceWithRawResponse
+
+        return AsyncWithdrawalRequestsResourceWithRawResponse(self._client.withdrawal_requests)
+
+    @cached_property
+    def lightning_payments(self) -> lightning_payments.AsyncLightningPaymentsResourceWithRawResponse:
+        from .resources.lightning_payments import AsyncLightningPaymentsResourceWithRawResponse
+
+        return AsyncLightningPaymentsResourceWithRawResponse(self._client.lightning_payments)
+
+    @cached_property
+    def wallet(self) -> wallet.AsyncWalletResourceWithRawResponse:
+        from .resources.wallet import AsyncWalletResourceWithRawResponse
+
+        return AsyncWalletResourceWithRawResponse(self._client.wallet)
+
+    @cached_property
+    def utils(self) -> utils.AsyncUtilsResourceWithRawResponse:
+        from .resources.utils import AsyncUtilsResourceWithRawResponse
+
+        return AsyncUtilsResourceWithRawResponse(self._client.utils)
+
+    @cached_property
+    def oauth2(self) -> oauth2.AsyncOauth2ResourceWithRawResponse:
+        from .resources.oauth2 import AsyncOauth2ResourceWithRawResponse
+
+        return AsyncOauth2ResourceWithRawResponse(self._client.oauth2)
+
+    @cached_property
+    def keysend_payments(self) -> keysend_payments.AsyncKeysendPaymentsResourceWithRawResponse:
+        from .resources.keysend_payments import AsyncKeysendPaymentsResourceWithRawResponse
+
+        return AsyncKeysendPaymentsResourceWithRawResponse(self._client.keysend_payments)
+
+    @cached_property
+    def email_payments(self) -> email_payments.AsyncEmailPaymentsResourceWithRawResponse:
+        from .resources.email_payments import AsyncEmailPaymentsResourceWithRawResponse
+
+        return AsyncEmailPaymentsResourceWithRawResponse(self._client.email_payments)
 
 
 class ZbdPaymentsWithStreamedResponse:
+    _client: ZbdPayments
+
     def __init__(self, client: ZbdPayments) -> None:
-        self.gamertags = gamertags.GamertagsResourceWithStreamingResponse(client.gamertags)
-        self.lightning_charges = lightning_charges.LightningChargesResourceWithStreamingResponse(
-            client.lightning_charges
-        )
-        self.internal_transfer = internal_transfer.InternalTransferResourceWithStreamingResponse(
-            client.internal_transfer
-        )
-        self.lightning_address = lightning_address.LightningAddressResourceWithStreamingResponse(
-            client.lightning_address
-        )
-        self.lightning_static_charges = lightning_static_charges.LightningStaticChargesResourceWithStreamingResponse(
-            client.lightning_static_charges
-        )
-        self.vouchers = vouchers.VouchersResourceWithStreamingResponse(client.vouchers)
-        self.withdrawal_requests = withdrawal_requests.WithdrawalRequestsResourceWithStreamingResponse(
-            client.withdrawal_requests
-        )
-        self.lightning_payments = lightning_payments.LightningPaymentsResourceWithStreamingResponse(
-            client.lightning_payments
-        )
-        self.wallet = wallet.WalletResourceWithStreamingResponse(client.wallet)
-        self.utils = utils.UtilsResourceWithStreamingResponse(client.utils)
-        self.oauth2 = oauth2.Oauth2ResourceWithStreamingResponse(client.oauth2)
-        self.keysend_payments = keysend_payments.KeysendPaymentsResourceWithStreamingResponse(client.keysend_payments)
-        self.email_payments = email_payments.EmailPaymentsResourceWithStreamingResponse(client.email_payments)
+        self._client = client
+
+    @cached_property
+    def gamertags(self) -> gamertags.GamertagsResourceWithStreamingResponse:
+        from .resources.gamertags import GamertagsResourceWithStreamingResponse
+
+        return GamertagsResourceWithStreamingResponse(self._client.gamertags)
+
+    @cached_property
+    def lightning_charges(self) -> lightning_charges.LightningChargesResourceWithStreamingResponse:
+        from .resources.lightning_charges import LightningChargesResourceWithStreamingResponse
+
+        return LightningChargesResourceWithStreamingResponse(self._client.lightning_charges)
+
+    @cached_property
+    def internal_transfer(self) -> internal_transfer.InternalTransferResourceWithStreamingResponse:
+        from .resources.internal_transfer import InternalTransferResourceWithStreamingResponse
+
+        return InternalTransferResourceWithStreamingResponse(self._client.internal_transfer)
+
+    @cached_property
+    def lightning_address(self) -> lightning_address.LightningAddressResourceWithStreamingResponse:
+        from .resources.lightning_address import LightningAddressResourceWithStreamingResponse
+
+        return LightningAddressResourceWithStreamingResponse(self._client.lightning_address)
+
+    @cached_property
+    def lightning_static_charges(self) -> lightning_static_charges.LightningStaticChargesResourceWithStreamingResponse:
+        from .resources.lightning_static_charges import LightningStaticChargesResourceWithStreamingResponse
+
+        return LightningStaticChargesResourceWithStreamingResponse(self._client.lightning_static_charges)
+
+    @cached_property
+    def vouchers(self) -> vouchers.VouchersResourceWithStreamingResponse:
+        from .resources.vouchers import VouchersResourceWithStreamingResponse
+
+        return VouchersResourceWithStreamingResponse(self._client.vouchers)
+
+    @cached_property
+    def withdrawal_requests(self) -> withdrawal_requests.WithdrawalRequestsResourceWithStreamingResponse:
+        from .resources.withdrawal_requests import WithdrawalRequestsResourceWithStreamingResponse
+
+        return WithdrawalRequestsResourceWithStreamingResponse(self._client.withdrawal_requests)
+
+    @cached_property
+    def lightning_payments(self) -> lightning_payments.LightningPaymentsResourceWithStreamingResponse:
+        from .resources.lightning_payments import LightningPaymentsResourceWithStreamingResponse
+
+        return LightningPaymentsResourceWithStreamingResponse(self._client.lightning_payments)
+
+    @cached_property
+    def wallet(self) -> wallet.WalletResourceWithStreamingResponse:
+        from .resources.wallet import WalletResourceWithStreamingResponse
+
+        return WalletResourceWithStreamingResponse(self._client.wallet)
+
+    @cached_property
+    def utils(self) -> utils.UtilsResourceWithStreamingResponse:
+        from .resources.utils import UtilsResourceWithStreamingResponse
+
+        return UtilsResourceWithStreamingResponse(self._client.utils)
+
+    @cached_property
+    def oauth2(self) -> oauth2.Oauth2ResourceWithStreamingResponse:
+        from .resources.oauth2 import Oauth2ResourceWithStreamingResponse
+
+        return Oauth2ResourceWithStreamingResponse(self._client.oauth2)
+
+    @cached_property
+    def keysend_payments(self) -> keysend_payments.KeysendPaymentsResourceWithStreamingResponse:
+        from .resources.keysend_payments import KeysendPaymentsResourceWithStreamingResponse
+
+        return KeysendPaymentsResourceWithStreamingResponse(self._client.keysend_payments)
+
+    @cached_property
+    def email_payments(self) -> email_payments.EmailPaymentsResourceWithStreamingResponse:
+        from .resources.email_payments import EmailPaymentsResourceWithStreamingResponse
+
+        return EmailPaymentsResourceWithStreamingResponse(self._client.email_payments)
 
 
 class AsyncZbdPaymentsWithStreamedResponse:
+    _client: AsyncZbdPayments
+
     def __init__(self, client: AsyncZbdPayments) -> None:
-        self.gamertags = gamertags.AsyncGamertagsResourceWithStreamingResponse(client.gamertags)
-        self.lightning_charges = lightning_charges.AsyncLightningChargesResourceWithStreamingResponse(
-            client.lightning_charges
-        )
-        self.internal_transfer = internal_transfer.AsyncInternalTransferResourceWithStreamingResponse(
-            client.internal_transfer
-        )
-        self.lightning_address = lightning_address.AsyncLightningAddressResourceWithStreamingResponse(
-            client.lightning_address
-        )
-        self.lightning_static_charges = (
-            lightning_static_charges.AsyncLightningStaticChargesResourceWithStreamingResponse(
-                client.lightning_static_charges
-            )
-        )
-        self.vouchers = vouchers.AsyncVouchersResourceWithStreamingResponse(client.vouchers)
-        self.withdrawal_requests = withdrawal_requests.AsyncWithdrawalRequestsResourceWithStreamingResponse(
-            client.withdrawal_requests
-        )
-        self.lightning_payments = lightning_payments.AsyncLightningPaymentsResourceWithStreamingResponse(
-            client.lightning_payments
-        )
-        self.wallet = wallet.AsyncWalletResourceWithStreamingResponse(client.wallet)
-        self.utils = utils.AsyncUtilsResourceWithStreamingResponse(client.utils)
-        self.oauth2 = oauth2.AsyncOauth2ResourceWithStreamingResponse(client.oauth2)
-        self.keysend_payments = keysend_payments.AsyncKeysendPaymentsResourceWithStreamingResponse(
-            client.keysend_payments
-        )
-        self.email_payments = email_payments.AsyncEmailPaymentsResourceWithStreamingResponse(client.email_payments)
+        self._client = client
+
+    @cached_property
+    def gamertags(self) -> gamertags.AsyncGamertagsResourceWithStreamingResponse:
+        from .resources.gamertags import AsyncGamertagsResourceWithStreamingResponse
+
+        return AsyncGamertagsResourceWithStreamingResponse(self._client.gamertags)
+
+    @cached_property
+    def lightning_charges(self) -> lightning_charges.AsyncLightningChargesResourceWithStreamingResponse:
+        from .resources.lightning_charges import AsyncLightningChargesResourceWithStreamingResponse
+
+        return AsyncLightningChargesResourceWithStreamingResponse(self._client.lightning_charges)
+
+    @cached_property
+    def internal_transfer(self) -> internal_transfer.AsyncInternalTransferResourceWithStreamingResponse:
+        from .resources.internal_transfer import AsyncInternalTransferResourceWithStreamingResponse
+
+        return AsyncInternalTransferResourceWithStreamingResponse(self._client.internal_transfer)
+
+    @cached_property
+    def lightning_address(self) -> lightning_address.AsyncLightningAddressResourceWithStreamingResponse:
+        from .resources.lightning_address import AsyncLightningAddressResourceWithStreamingResponse
+
+        return AsyncLightningAddressResourceWithStreamingResponse(self._client.lightning_address)
+
+    @cached_property
+    def lightning_static_charges(
+        self,
+    ) -> lightning_static_charges.AsyncLightningStaticChargesResourceWithStreamingResponse:
+        from .resources.lightning_static_charges import AsyncLightningStaticChargesResourceWithStreamingResponse
+
+        return AsyncLightningStaticChargesResourceWithStreamingResponse(self._client.lightning_static_charges)
+
+    @cached_property
+    def vouchers(self) -> vouchers.AsyncVouchersResourceWithStreamingResponse:
+        from .resources.vouchers import AsyncVouchersResourceWithStreamingResponse
+
+        return AsyncVouchersResourceWithStreamingResponse(self._client.vouchers)
+
+    @cached_property
+    def withdrawal_requests(self) -> withdrawal_requests.AsyncWithdrawalRequestsResourceWithStreamingResponse:
+        from .resources.withdrawal_requests import AsyncWithdrawalRequestsResourceWithStreamingResponse
+
+        return AsyncWithdrawalRequestsResourceWithStreamingResponse(self._client.withdrawal_requests)
+
+    @cached_property
+    def lightning_payments(self) -> lightning_payments.AsyncLightningPaymentsResourceWithStreamingResponse:
+        from .resources.lightning_payments import AsyncLightningPaymentsResourceWithStreamingResponse
+
+        return AsyncLightningPaymentsResourceWithStreamingResponse(self._client.lightning_payments)
+
+    @cached_property
+    def wallet(self) -> wallet.AsyncWalletResourceWithStreamingResponse:
+        from .resources.wallet import AsyncWalletResourceWithStreamingResponse
+
+        return AsyncWalletResourceWithStreamingResponse(self._client.wallet)
+
+    @cached_property
+    def utils(self) -> utils.AsyncUtilsResourceWithStreamingResponse:
+        from .resources.utils import AsyncUtilsResourceWithStreamingResponse
+
+        return AsyncUtilsResourceWithStreamingResponse(self._client.utils)
+
+    @cached_property
+    def oauth2(self) -> oauth2.AsyncOauth2ResourceWithStreamingResponse:
+        from .resources.oauth2 import AsyncOauth2ResourceWithStreamingResponse
+
+        return AsyncOauth2ResourceWithStreamingResponse(self._client.oauth2)
+
+    @cached_property
+    def keysend_payments(self) -> keysend_payments.AsyncKeysendPaymentsResourceWithStreamingResponse:
+        from .resources.keysend_payments import AsyncKeysendPaymentsResourceWithStreamingResponse
+
+        return AsyncKeysendPaymentsResourceWithStreamingResponse(self._client.keysend_payments)
+
+    @cached_property
+    def email_payments(self) -> email_payments.AsyncEmailPaymentsResourceWithStreamingResponse:
+        from .resources.email_payments import AsyncEmailPaymentsResourceWithStreamingResponse
+
+        return AsyncEmailPaymentsResourceWithStreamingResponse(self._client.email_payments)
 
 
 Client = ZbdPayments
