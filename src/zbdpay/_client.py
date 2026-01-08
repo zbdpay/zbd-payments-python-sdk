@@ -234,9 +234,7 @@ class ZbdPayments(SyncAPIClient):
 
     @override
     def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
-        if self.apikey and headers.get("apikey"):
-            return
-        if isinstance(custom_headers.get("apikey"), Omit):
+        if headers.get("apikey") or isinstance(custom_headers.get("apikey"), Omit):
             return
 
         raise TypeError(
@@ -489,9 +487,7 @@ class AsyncZbdPayments(AsyncAPIClient):
 
     @override
     def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
-        if self.apikey and headers.get("apikey"):
-            return
-        if isinstance(custom_headers.get("apikey"), Omit):
+        if headers.get("apikey") or isinstance(custom_headers.get("apikey"), Omit):
             return
 
         raise TypeError(
