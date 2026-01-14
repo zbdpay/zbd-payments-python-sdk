@@ -24,7 +24,7 @@ The REST API documentation can be found on [docs.zbdpay.com](https://docs.zbdpay
 
 ```sh
 # install from PyPI
-pip install --pre zbdpay
+pip install '--pre zbdpay'
 ```
 
 ## Usage
@@ -86,7 +86,7 @@ You can enable this by installing `aiohttp`:
 
 ```sh
 # install from PyPI
-pip install --pre zbdpay[aiohttp]
+pip install '--pre zbdpay[aiohttp]'
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
