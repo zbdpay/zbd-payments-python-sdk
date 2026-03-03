@@ -21,6 +21,8 @@ __all__ = ["EmailPaymentsResource", "AsyncEmailPaymentsResource"]
 
 
 class EmailPaymentsResource(SyncAPIResource):
+    """Email endpoints"""
+
     @cached_property
     def with_raw_response(self) -> EmailPaymentsResourceWithRawResponse:
         """
@@ -90,6 +92,8 @@ class EmailPaymentsResource(SyncAPIResource):
 
 
 class AsyncEmailPaymentsResource(AsyncAPIResource):
+    """Email endpoints"""
+
     @cached_property
     def with_raw_response(self) -> AsyncEmailPaymentsResourceWithRawResponse:
         """

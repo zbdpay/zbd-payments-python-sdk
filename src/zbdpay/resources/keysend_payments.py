@@ -21,6 +21,8 @@ __all__ = ["KeysendPaymentsResource", "AsyncKeysendPaymentsResource"]
 
 
 class KeysendPaymentsResource(SyncAPIResource):
+    """Keysend Payments endpoints"""
+
     @cached_property
     def with_raw_response(self) -> KeysendPaymentsResourceWithRawResponse:
         """
@@ -104,6 +106,8 @@ class KeysendPaymentsResource(SyncAPIResource):
 
 
 class AsyncKeysendPaymentsResource(AsyncAPIResource):
+    """Keysend Payments endpoints"""
+
     @cached_property
     def with_raw_response(self) -> AsyncKeysendPaymentsResourceWithRawResponse:
         """

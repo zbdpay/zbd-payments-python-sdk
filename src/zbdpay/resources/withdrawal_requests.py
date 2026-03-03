@@ -21,6 +21,8 @@ __all__ = ["WithdrawalRequestsResource", "AsyncWithdrawalRequestsResource"]
 
 
 class WithdrawalRequestsResource(SyncAPIResource):
+    """Withdrawal Requests endpoints"""
+
     @cached_property
     def with_raw_response(self) -> WithdrawalRequestsResourceWithRawResponse:
         """
@@ -132,6 +134,8 @@ class WithdrawalRequestsResource(SyncAPIResource):
 
 
 class AsyncWithdrawalRequestsResource(AsyncAPIResource):
+    """Withdrawal Requests endpoints"""
+
     @cached_property
     def with_raw_response(self) -> AsyncWithdrawalRequestsResourceWithRawResponse:
         """

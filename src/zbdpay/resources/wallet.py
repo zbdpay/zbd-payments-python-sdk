@@ -19,6 +19,8 @@ __all__ = ["WalletResource", "AsyncWalletResource"]
 
 
 class WalletResource(SyncAPIResource):
+    """Wallet endpoints"""
+
     @cached_property
     def with_raw_response(self) -> WalletResourceWithRawResponse:
         """
@@ -60,6 +62,8 @@ class WalletResource(SyncAPIResource):
 
 
 class AsyncWalletResource(AsyncAPIResource):
+    """Wallet endpoints"""
+
     @cached_property
     def with_raw_response(self) -> AsyncWalletResourceWithRawResponse:
         """

@@ -20,6 +20,8 @@ __all__ = ["Oauth2Resource", "AsyncOauth2Resource"]
 
 
 class Oauth2Resource(SyncAPIResource):
+    """OAuth2 endpoints"""
+
     @cached_property
     def with_raw_response(self) -> Oauth2ResourceWithRawResponse:
         """
@@ -147,6 +149,8 @@ class Oauth2Resource(SyncAPIResource):
 
 
 class AsyncOauth2Resource(AsyncAPIResource):
+    """OAuth2 endpoints"""
+
     @cached_property
     def with_raw_response(self) -> AsyncOauth2ResourceWithRawResponse:
         """

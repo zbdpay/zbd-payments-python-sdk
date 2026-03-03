@@ -21,6 +21,8 @@ __all__ = ["VouchersResource", "AsyncVouchersResource"]
 
 
 class VouchersResource(SyncAPIResource):
+    """Vouchers endpoints"""
+
     @cached_property
     def with_raw_response(self) -> VouchersResourceWithRawResponse:
         """
@@ -190,6 +192,8 @@ class VouchersResource(SyncAPIResource):
 
 
 class AsyncVouchersResource(AsyncAPIResource):
+    """Vouchers endpoints"""
+
     @cached_property
     def with_raw_response(self) -> AsyncVouchersResourceWithRawResponse:
         """

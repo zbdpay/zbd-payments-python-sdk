@@ -21,6 +21,8 @@ __all__ = ["GamertagsResource", "AsyncGamertagsResource"]
 
 
 class GamertagsResource(SyncAPIResource):
+    """ZBD Gamertag endpoints"""
+
     @cached_property
     def with_raw_response(self) -> GamertagsResourceWithRawResponse:
         """
@@ -252,6 +254,8 @@ class GamertagsResource(SyncAPIResource):
 
 
 class AsyncGamertagsResource(AsyncAPIResource):
+    """ZBD Gamertag endpoints"""
+
     @cached_property
     def with_raw_response(self) -> AsyncGamertagsResourceWithRawResponse:
         """

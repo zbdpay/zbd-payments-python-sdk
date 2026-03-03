@@ -21,6 +21,8 @@ __all__ = ["LightningChargesResource", "AsyncLightningChargesResource"]
 
 
 class LightningChargesResource(SyncAPIResource):
+    """Lightning Charges endpoints"""
+
     @cached_property
     def with_raw_response(self) -> LightningChargesResourceWithRawResponse:
         """
@@ -132,6 +134,8 @@ class LightningChargesResource(SyncAPIResource):
 
 
 class AsyncLightningChargesResource(AsyncAPIResource):
+    """Lightning Charges endpoints"""
+
     @cached_property
     def with_raw_response(self) -> AsyncLightningChargesResourceWithRawResponse:
         """

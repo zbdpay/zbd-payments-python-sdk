@@ -21,6 +21,8 @@ __all__ = ["InternalTransferResource", "AsyncInternalTransferResource"]
 
 
 class InternalTransferResource(SyncAPIResource):
+    """Internal Transfers endpoints"""
+
     @cached_property
     def with_raw_response(self) -> InternalTransferResourceWithRawResponse:
         """
@@ -86,6 +88,8 @@ class InternalTransferResource(SyncAPIResource):
 
 
 class AsyncInternalTransferResource(AsyncAPIResource):
+    """Internal Transfers endpoints"""
+
     @cached_property
     def with_raw_response(self) -> AsyncInternalTransferResourceWithRawResponse:
         """

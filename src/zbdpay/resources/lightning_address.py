@@ -21,6 +21,8 @@ __all__ = ["LightningAddressResource", "AsyncLightningAddressResource"]
 
 
 class LightningAddressResource(SyncAPIResource):
+    """Lightning Address endpoints"""
+
     @cached_property
     def with_raw_response(self) -> LightningAddressResourceWithRawResponse:
         """
@@ -180,6 +182,8 @@ class LightningAddressResource(SyncAPIResource):
 
 
 class AsyncLightningAddressResource(AsyncAPIResource):
+    """Lightning Address endpoints"""
+
     @cached_property
     def with_raw_response(self) -> AsyncLightningAddressResourceWithRawResponse:
         """

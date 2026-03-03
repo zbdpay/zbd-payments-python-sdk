@@ -21,6 +21,8 @@ __all__ = ["UtilsResource", "AsyncUtilsResource"]
 
 
 class UtilsResource(SyncAPIResource):
+    """Utilities endpoints"""
+
     @cached_property
     def with_raw_response(self) -> UtilsResourceWithRawResponse:
         """
@@ -153,6 +155,8 @@ class UtilsResource(SyncAPIResource):
 
 
 class AsyncUtilsResource(AsyncAPIResource):
+    """Utilities endpoints"""
+
     @cached_property
     def with_raw_response(self) -> AsyncUtilsResourceWithRawResponse:
         """
