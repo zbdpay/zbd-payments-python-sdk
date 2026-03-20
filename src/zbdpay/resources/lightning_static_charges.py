@@ -6,7 +6,7 @@ import httpx
 
 from ..types import lightning_static_charge_create_params, lightning_static_charge_update_params
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -137,7 +137,7 @@ class LightningStaticChargesResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._get(
-            f"/v0/static-charges/{id}",
+            path_template("/v0/static-charges/{id}", id=id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -192,7 +192,7 @@ class LightningStaticChargesResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._patch(
-            f"/v0/static-charges/{id}",
+            path_template("/v0/static-charges/{id}", id=id),
             body=maybe_transform(
                 {
                     "allowed_slots": allowed_slots,
@@ -329,7 +329,7 @@ class AsyncLightningStaticChargesResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._get(
-            f"/v0/static-charges/{id}",
+            path_template("/v0/static-charges/{id}", id=id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -384,7 +384,7 @@ class AsyncLightningStaticChargesResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._patch(
-            f"/v0/static-charges/{id}",
+            path_template("/v0/static-charges/{id}", id=id),
             body=await async_maybe_transform(
                 {
                     "allowed_slots": allowed_slots,
