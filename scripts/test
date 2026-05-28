@@ -26,17 +26,21 @@ function is_overriding_api_base_url() {
 }
 
 if ! is_overriding_api_base_url && ! prism_is_running ; then
-  # When we exit this script, make sure to kill the background mock server process
-  trap 'kill_server_on_port 4010' EXIT
-
-  # Start the dev server
-  ./scripts/mock --daemon
+  if [ -f .stats.yml ]; then
+    # When we exit this script, make sure to kill the background mock server process
+    trap 'kill_server_on_port 4010' EXIT
+    # Start the dev server
+    ./scripts/mock --daemon
+  else
+    echo -e "${YELLOW}⚠ No .stats.yml found; skipping mock server setup.${NC}"
+    echo
+  fi
 fi
 
 if is_overriding_api_base_url ; then
   echo -e "${GREEN}✔ Running tests against ${TEST_API_BASE_URL}${NC}"
   echo
-elif ! prism_is_running ; then
+elif ! prism_is_running && [ -f .stats.yml ]; then
   echo -e "${RED}ERROR:${NC} The test suite will not run without a mock Prism server"
   echo -e "running against your OpenAPI spec."
   echo
@@ -47,7 +51,7 @@ elif ! prism_is_running ; then
   echo
 
   exit 1
-else
+elif prism_is_running ; then
   echo -e "${GREEN}✔ Mock prism server is running with your OpenAPI spec${NC}"
   echo
 fi

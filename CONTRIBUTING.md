@@ -34,13 +34,12 @@ $ pip install -r requirements-dev.lock
 
 ## Modifying/Adding code
 
-Most of the SDK is generated code. Modifications to code will be persisted between generations, but may
-result in merge conflicts between manual patches and changes from the generator. The generator will never
-modify the contents of the `src/zbdpay/lib/` and `examples/` directories.
+The SDK is hand-maintained. You can modify any code in the `src/zbdpay/` directory.
+The `src/zbdpay/lib/` and `examples/` directories are intended for code that will not be overwritten.
 
 ## Adding and running examples
 
-All files in the `examples/` directory are not modified by the generator and can be freely edited or added to.
+All files in the `examples/` directory can be freely edited or added to.
 
 ```py
 # add an example to examples/<your-example>.py
@@ -57,7 +56,7 @@ $ ./examples/<your-example>.py
 
 ## Using the repository from source
 
-If you’d like to use the repository from source, you can either install from git or link to a cloned repository:
+If you'd like to use the repository from source, you can either install from git or link to a cloned repository:
 
 To install via git:
 
@@ -85,13 +84,6 @@ $ pip install ./path-to-wheel-file.whl
 
 ## Running tests
 
-Most tests require you to [set up a mock server](https://github.com/stoplightio/prism) against the OpenAPI spec to run the tests.
-
-```sh
-# you will need npm installed
-$ npx prism mock path/to/your/openapi.yml
-```
-
 ```sh
 $ ./scripts/test
 ```
@@ -114,9 +106,6 @@ $ ./scripts/format
 ```
 
 ## Publishing and releases
-
-Changes made to this repository via the automated release PR pipeline should publish to PyPI automatically. If
-the changes aren't made through the automated pipeline, you may want to make releases manually.
 
 ### Publish with a GitHub workflow
 
